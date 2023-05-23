@@ -53,7 +53,6 @@ local function nearItem()
 		local siz = entity.Size
         local f = Font()
         f:Load("font/terminus.fnt")
-		-- TODO: if there are more items on the same row, after the one is taken "PostRender Failed: attempt to index a nil value"
         local value = items[entity.SubType].tier
         local color = colors[value]
 		-- find the index of the color in the list
