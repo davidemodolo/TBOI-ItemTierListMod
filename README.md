@@ -16,9 +16,9 @@ Some screenshots:
 
 ## TODO
 
-- [ ] Line 56: if there are more items on the same row, after the one is taken "PostRender Failed: attempt to index a nil value"
-- [ ] Better discriminator AB+/Repentance than the one in line 9
-- [ ] Code refactoring/optimization (for example the check of Repentance/AB+
+- [ ] `Line 56`: if there are more items on the same row, after the one is taken "PostRender Failed: attempt to index a nil value"
+- [ ] Better discriminator AB+/Repentance than the one in `Line 9`
+- [ ] Code refactoring/optimization
 - [ ] Now (unexpectedly) if an Item as a tier E, the letter E wiggles faster than an item with a tier S+ but it should be the other way around
 - [ ] Create a nice tier list
 - [ ] Publish on Steam Workshop
