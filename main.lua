@@ -48,30 +48,38 @@ local function nearItem()
   local c = 0
   for i = 1, #entities do
     local entity = entities[i]
-    if entity.Type == EntityType.ENTITY_PICKUP and entity.Variant == 100 then
-        local screenPosition = Isaac.WorldToScreen(entity.Position)
-		local siz = entity.Size
-        local f = Font()
-        f:Load("font/terminus.fnt")
-        local value = items[entity.SubType].tier
-        local color = colors[value]
-		-- find the index of the color in the list
-		local index = 0
-		for key, val in pairs(colors) do
-			index = index + 1
-			if key == value then
-				break
-			end
-		end
-		-- print(items[entity.SubType].name .. " " .. value .. " " .. index)
-		local wiggleSpeed = 0.05 * (#colors - index)  
-		local wiggleAmplitude = 0.25
-		local time = Game():GetFrameCount() * wiggleSpeed
-		local wiggleOffsetX = math.abs((math.sin(time) * wiggleAmplitude))+1
-		local wiggleOffsetY = math.abs((math.cos(time) * wiggleAmplitude))+1
-        f:DrawStringScaled(value, screenPosition.X+siz*2/3, screenPosition.Y-siz-f:GetLineHeight(),0.5* wiggleOffsetY, 0.5 * wiggleOffsetY, color, 3, true)
-
-
+    if entity.Type == EntityType.ENTITY_PICKUP and entity.Variant == 100 then -- it means it's an active or passive item
+      -- now check if the item is taken (picked up) 
+      local siz = entity.Size
+      local f = Font()
+      f:Load("font/terminus.fnt")
+      -- TODO: fix problem when item taken that crashes the mod for the current room
+      -- now it works but after picking up an item sometimes it does not show the tier until you leave the room and come back
+      if items[entity.SubType] == nil then
+        return
+      end
+      -- check if the entity exists
+      if entity:Exists() == false then
+        return
+      end
+      local value = items[entity.SubType].tier
+      local color = colors[value]
+      -- find the index of the color in the list
+      local index = 0
+      for key, val in pairs(colors) do
+        index = index + 1
+        if key == value then
+          break
+        end
+      end
+      -- print(items[entity.SubType].name .. " " .. value .. " " .. index)
+      local wiggleSpeed = 0.05 * (#colors - index)  
+      local wiggleAmplitude = 0.25
+      local time = Game():GetFrameCount() * wiggleSpeed
+      local wiggleOffsetX = math.abs((math.sin(time) * wiggleAmplitude))+1
+      local wiggleOffsetY = math.abs((math.cos(time) * wiggleAmplitude))+1
+      local screenPosition = Isaac.WorldToScreen(entity.Position)
+      f:DrawStringScaled(value, screenPosition.X+siz*2/3, screenPosition.Y-siz-f:GetLineHeight(),0.5* wiggleOffsetY, 0.5 * wiggleOffsetY, color, 3, true)
     end
   end
 end
@@ -79,4 +87,3 @@ end
 
   
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, nearItem)
- 
