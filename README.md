@@ -16,7 +16,7 @@ Some screenshots:
 
 ## TODO
 
-- [x] `Line 56`: if there are more items on the same row, after the one is taken "PostRender Failed: attempt to index a nil value" _little hack to fix, not perfect_
+- [x] `Line 56`: if there are more items on the same row, after the one is taken "PostRender Failed: attempt to index a nil value" _little hack to fix, not perfect and not always working_
 - [ ] Better discriminator AB+/Repentance than the one in `Line 9`
 - [ ] Code refactoring/optimization
 - [x] Now (unexpectedly) if an Item as a tier E, the letter E wiggles faster than an item with a tier S+ but it should be the other way around _now it works, but I'm sure there is a smartest way_
