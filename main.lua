@@ -35,6 +35,16 @@ local colors = {
   ["E"] = KColor(255/255, 0/255, 0/255, 1)
 }
 
+local speed ={
+  ["S+"] = 0.35,
+  ["S"] = 0.30,
+  ["A"] = 0.25,
+  ["B"] = 0.20,
+  ["C"] = 0.15,
+  ["D"] = 0.10,
+  ["E"] = 0.05
+}
+
 local function nearItem()
   local curses = Game():GetLevel():GetCurses()
   if not (curses & LevelCurse.CURSE_OF_BLIND ~= LevelCurse.CURSE_OF_BLIND) then
@@ -65,21 +75,24 @@ local function nearItem()
       local value = items[entity.SubType].tier
       local color = colors[value]
       -- find the index of the color in the list
-      local index = 0
-      for key, val in pairs(colors) do
-        index = index + 1
-        if key == value then
-          break
-        end
-      end
+      -- local index = 0
+      -- for key, val in pairs(colors) do
+      --   index = index + 1
+      --   if key == value then
+      --     break
+      --   end
+      -- end
       -- print(items[entity.SubType].name .. " " .. value .. " " .. index)
-      local wiggleSpeed = 0.05 * (#colors - index)  
+      -- local wiggleSpeed = 0.05 * (#colors - index) 
+      local wiggleSpeed = speed[value]
       local wiggleAmplitude = 0.25
       local time = Game():GetFrameCount() * wiggleSpeed
       local wiggleOffsetX = math.abs((math.sin(time) * wiggleAmplitude))+1
       local wiggleOffsetY = math.abs((math.cos(time) * wiggleAmplitude))+1
       local screenPosition = Isaac.WorldToScreen(entity.Position)
       f:DrawStringScaled(value, screenPosition.X+siz*2/3, screenPosition.Y-siz-f:GetLineHeight(),0.5* wiggleOffsetY, 0.5 * wiggleOffsetY, color, 3, true)
+      -- print(items[entity.SubType].name .. " " .. value)
+
     end
   end
 end
