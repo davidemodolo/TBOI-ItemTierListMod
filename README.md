@@ -23,6 +23,8 @@ Some screenshots:
 - [x] Create a nice tier list _only for AB+, taken from [Isaac Ranks](https://www.isaacranks.com/afterbirthplus/ranks)_
 - [ ] Publish on Steam Workshop
 
+Next todo: use a callback to get the items in the room the first time you enter and then the `MC_POST_RENDER` callback just to print the values. Also update the values when an item is picked up (because there could be multiple items in the same room).
+
 ## Contributors
 
 - [davidemodolo](https://github.com/davidemodolo)
