@@ -97,6 +97,32 @@ local function nearItem()
   end
 end
 
+-- Function to check the player's items
+function CheckPlayerItems()
+  local player = Isaac.GetPlayer(0)
+  local itemString = "Player items: "
+
+  -- Iterate through each item the player has
+  for i = 1, player:GetNumCollectibles() do
+      local itemID = player:GetCollectible(i - 1)
+      local itemConfig = Isaac.GetItemConfig():GetCollectible(itemID)
+      local itemName = itemConfig.Name
+
+      -- Add the item name to the string
+      itemString = itemString .. itemName .. ", "
+  end
+
+  -- Remove the trailing comma and space
+  itemString = itemString:sub(1, -3)
+
+  -- Print or use the item string as desired
+  print(itemString)
+end
+
+
+
+-- Register the callback function
+mod:AddCallback(ModCallbacks.MC_POST_PLAYER_UPDATE, CheckPlayerItems)
 
   
 mod:AddCallback(ModCallbacks.MC_POST_RENDER, nearItem)
